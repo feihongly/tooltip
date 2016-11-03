@@ -1,6 +1,6 @@
 ;(function($, window, document, undefined) {
-    //定义uwTooltipOption的构造函数
-    var uwTooltipOption = function(ele, opt) {
+    //定义gfTooltipOption的构造函数
+    var gfTooltipOption = function(ele, opt) {
 //        alert(ele.find("table").get(0))
         this.$elements = ele,
         this.defaults = {
@@ -10,22 +10,17 @@
                 x: 20,
                 y: 10
             },
-            positionFlag: false,
-            events: {
-                mouseenter: 'mouseenter',
-                mouseleave: 'mouseleave',
-                mousemove: 'mousemove'
-            }
+            position: 'left',
+            autoPosition: false
         },
         this.options = $.extend({}, this.defaults, opt);
-        this.$tip = '<div class="uwTooltip"></div>';
+        this.$tip = '<div class="gfTooltip"></div>';
     }
-    //定义uwTooltipOption的方法
-    uwTooltipOption.prototype = {
+    //定义gfTooltipOption的方法
+    gfTooltipOption.prototype = {
         init: function() {
             var tthis = this;
             return tthis.$elements.each(function(i){
-                console.log('test');
                 var $tip = $(tthis.$tip).appendTo('body');
                 $tip.hide();
                 $(this).on({
@@ -36,7 +31,7 @@
                             $tip.html(tthis.options.contents);
                         }
                         var bottom = 0,right = 0;
-                        if(tthis.options.positionFlag){
+                        if(tthis.options.autoPosition){
                             if(event.pageY > $(window).height() - 100){
                                 bottom = $tip.height();
                                 $tip.addClass('bottom');
@@ -49,9 +44,12 @@
                             }else{
                                 $tip.removeClass('right');
                             }
+                        }else{
+                            if(tthis.options.position == 'top'){
+                                $tip.addClass('top');
+                            }
                         }
 
-                        console.log('bottom',bottom);
                         $tip.css({
                             top: event.pageY - bottom + tthis.options.offset.y,
                             left: event.pageX - right + tthis.options.offset.x
@@ -62,7 +60,7 @@
                     },
                     'mousemove': function(event){
                         var bottom = 0,right = 0;
-                        if(tthis.options.positionFlag){
+                        if(tthis.options.autoPosition){
                             if(event.pageY > $(window).height() - 100){
                                 bottom = $tip.height();
                                 $tip.addClass('bottom');
@@ -86,37 +84,16 @@
             });
         }
     }
-    //在插件中使用uwTooltipOption对象
-    $.fn.uwTooltip = function(options,args) {
-        //创建uwTooltipOption的实体
+    //在插件中使用gfTooltipOption对象
+    $.fn.gfTooltip = function(options,args) {
+        //创建gfTooltipOption的实体
         if(uto == undefined)
-            var uto = new uwTooltipOption(this, options);
+            var uto = new gfTooltipOption(this, options);
         //调用其方法
-//        typeof method === 'object' || !method
         if (typeof options === 'object' || !options) {
             return uto.init();
         }else{
-//            alert(args)
             return uto[options].apply(uto, args);
         }
     }
 })(jQuery, window, document);
-
-// $(function(){
-//     $('body').on({
-//         'mouseenter': function(event){
-//             if(typeof tthis.options.contents == 'function'){
-//                 tthis.$elements.html(tthis.options.contents(this));
-//             }else{
-//                 tthis.$elements.html(tthis.options.contents);
-//             }
-//             $(this).css({
-//                 top: event.pageY + tthis.options.offset.y,
-//                 left: event.pageX + tthis.options.offset.x
-//             }).fadeIn();
-//         },
-//         'mouseleave': function(event){
-//             $(this).fadeOut();
-//         }
-//     },'.uwTooltip');
-// });

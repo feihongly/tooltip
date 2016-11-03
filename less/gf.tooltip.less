@@ -1,0 +1,86 @@
+@import "style.less";
+@tip-bg: #FFF3CF;
+@tip-width: 6px;
+
+.gfTooltip {
+    .bordered;
+    background: @tip-bg;
+    color: @font-color;
+
+    position: absolute;
+    z-index: 9999;
+    max-width: 200px;
+    padding: 5px;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: -@tip-width;
+        top: @tip-width;
+        width: 0;
+        height: 0;
+        border-right: @tip-width solid @tip-bg;
+        border-top: @tip-width solid rgba(0,0,0,0);
+        border-bottom: @tip-width solid rgba(0,0,0,0);
+    }
+
+    &.bottom:after {
+        top: unset;
+        bottom: @tip-width;
+    }
+
+    &.right:after {
+        left: unset;
+        right: -@tip-width;
+        border-right: none;
+        border-left: @tip-width solid @tip-bg;
+        border-top: @tip-width solid rgba(0,0,0,0);
+        border-bottom: @tip-width solid rgba(0,0,0,0);
+    }
+
+    &.top:after {
+        bottom: @tip-width;
+        top: -@tip-width;
+        border-top: none;
+        border-bottom: @tip-width solid @tip-bg;
+        border-right: @tip-width solid rgba(0,0,0,0);
+        border-left: @tip-width solid rgba(0,0,0,0);
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: -@tip-width - 1;
+        top: @tip-width;
+        width: 0;
+        height: 0;
+        border-right: @tip-width solid @border;
+        border-top: @tip-width solid rgba(0,0,0,0);
+        border-bottom: @tip-width solid rgba(0,0,0,0);
+    }
+
+    &.bottom:before {
+        top: unset;
+        bottom: @tip-width + 1;
+    }
+
+    &.right:before {
+        left: unset;
+        right: -@tip-width - 1;
+        border-right: none;
+        border-left: @tip-width solid @border;
+        border-top: @tip-width solid rgba(0,0,0,0);
+        border-bottom: @tip-width solid rgba(0,0,0,0);
+    }
+
+    &.top:before {
+        bottom: unset;
+        top: -@tip-width - 1;
+        border-top: none;
+        border-bottom: @tip-width solid @border;
+        border-right: @tip-width solid rgba(0,0,0,0);
+        border-left: @tip-width solid rgba(0,0,0,0);
+    }
+
+}

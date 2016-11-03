@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Sample for Tooltip</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    
+    <link rel="stylesheet" type="text/css" href="/dist/css/gf.tooltip.css">
+</head>
+
+<body>
+    <h1>Tooltip</h1>
+    <h3>A sample</h3>
+    <article>
+        <span class="tooltip" data-tips="Here is tooltips">Move cursor to here</span>
+    </article>
+    <h3>How to use</h3>
+    <article></article>
+    <script src="/dist/plugin/jquery.min.js"></script>
+    <script src="/dist/js/jquery.gf.tooltip.min.js"></script>
+    <script>
+        $(function(){
+            $('article').gfTooltip({
+                target: '.tooltip',
+                position: 'top',
+                contents: function(elem){
+                    return $(elem).attr('data-tips');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
