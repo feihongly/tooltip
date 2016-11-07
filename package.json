@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.1.0",
+    "dateformat": "^1.0.12",
+    "less": "^2.7.1",
+    "gulp-uglify": "^2.0.0",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-plumber": "^1.1.0",
+    "node-notifier": "^4.6.1"
+  }
+}

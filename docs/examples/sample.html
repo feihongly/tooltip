@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
-    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/agate.min.css">
     <link rel="stylesheet" type="text/css" href="/dist/css/gf.tooltip.css">
 </head>
 
@@ -14,22 +14,61 @@
     <h1>Tooltip</h1>
     <h3>A sample</h3>
     <article>
-        <span class="tooltip" data-tips="Here is tooltips">Move cursor to here</span>
+        <p class="text-left"><span class="tooltip" data-tips="Here is tooltips">Move cursor to here</span></p>
+        <p class="text-right"><span class="tooltip" data-tips="Here is tooltips">Move cursor to here</span></p>
+        <p class="text-bottom gototop"><span class="tooltip" data-tips="Go to top">▲</span></p>
     </article>
     <h3>How to use</h3>
-    <article></article>
+    <article>
+        <h4>Include</h4>
+<pre>
+<code class="html">
+&lt;link rel="stylesheet" type="text/css" href="/dist/css/gf.tooltip.css"&gt;
+&lt;script src="/dist/plugin/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="/dist/js/jquery.gf.tooltip.min.js"&gt;&lt;/script&gt;
+</code>
+</pre>
+        <h4>HTML</h4>
+<pre>
+<code class="html">
+&lt;span class="tooltip" data-tips="Here is tooltips"&gt;Move cursor to here&lt;/span&gt;
+</code>
+</pre>
+        <h4>JS</h4>
+<pre>
+<code class="js">
+$(function(){
+    $('body').gfTooltip({
+        target: '.tooltip',
+        autoPosition: true,
+        contents: function(elem){
+            return $(elem).attr('data-tips');
+        }
+    });
+});
+</code>
+</pre>
+    </article>
     <script src="/dist/plugin/jquery.min.js"></script>
     <script src="/dist/js/jquery.gf.tooltip.min.js"></script>
     <script>
         $(function(){
             $('article').gfTooltip({
                 target: '.tooltip',
-                position: 'top',
+                autoPosition: true,
                 contents: function(elem){
                     return $(elem).attr('data-tips');
                 }
             });
+
+            $('body').gfTooltip({
+                target: 'h1',
+                autoPosition: true,
+                contents: 'H1 Tooltip'
+            });
         });
     </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>

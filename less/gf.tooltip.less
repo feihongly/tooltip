@@ -11,7 +11,7 @@
     z-index: 9999;
     max-width: 200px;
     padding: 5px;
-    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+    box-shadow: 2px 2px 1px rgba(0,0,0,0.2);
 
     &::after {
         content: '';
@@ -25,11 +25,6 @@
         border-bottom: @tip-width solid rgba(0,0,0,0);
     }
 
-    &.bottom:after {
-        top: unset;
-        bottom: @tip-width;
-    }
-
     &.right:after {
         left: unset;
         right: -@tip-width;
@@ -39,9 +34,25 @@
         border-bottom: @tip-width solid rgba(0,0,0,0);
     }
 
+    &.bottom:after {
+        top: unset;
+        bottom: -@tip-width;
+        left: @tip-width;
+        border-bottom: none;
+        border-right: @tip-width solid rgba(0,0,0,0);
+        border-left: @tip-width solid rgba(0,0,0,0);
+        border-top: @tip-width solid @tip-bg;
+    }
+
+    &.right-bottom:after {
+        left: unset;
+        right: @tip-width;
+    }
+
     &.top:after {
         bottom: @tip-width;
         top: -@tip-width;
+        left: @tip-width;
         border-top: none;
         border-bottom: @tip-width solid @tip-bg;
         border-right: @tip-width solid rgba(0,0,0,0);
@@ -60,11 +71,6 @@
         border-bottom: @tip-width solid rgba(0,0,0,0);
     }
 
-    &.bottom:before {
-        top: unset;
-        bottom: @tip-width + 1;
-    }
-
     &.right:before {
         left: unset;
         right: -@tip-width - 1;
@@ -74,13 +80,48 @@
         border-bottom: @tip-width solid rgba(0,0,0,0);
     }
 
+    &.bottom:before {
+        top: unset;
+        bottom: -@tip-width - 1;
+        left: @tip-width;
+        border-bottom: none;
+        border-right: @tip-width solid rgba(0,0,0,0);
+        border-left: @tip-width solid rgba(0,0,0,0);
+        border-top: @tip-width solid @border;
+    }
+
+    &.right-bottom:before {
+        left: unset;
+        right: @tip-width;
+    }
+
     &.top:before {
         bottom: unset;
         top: -@tip-width - 1;
+        left: @tip-width;
         border-top: none;
         border-bottom: @tip-width solid @border;
         border-right: @tip-width solid rgba(0,0,0,0);
         border-left: @tip-width solid rgba(0,0,0,0);
     }
 
+}
+
+article {
+    border: 1px solid @border;
+    padding: @default-padding;
+    border-radius: @border-radius;
+
+    .gototop {
+        border: inherit;
+        border-radius: inherit;
+        padding: 10px;
+        background: #000;
+        color: #FFF;
+    }
+
+    pre>code {
+        padding-bottom: 20px !important;
+        font-size: @font-size-16 !important;
+    }
 }

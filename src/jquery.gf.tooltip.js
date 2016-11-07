@@ -30,19 +30,27 @@
                         }else{
                             $tip.html(tthis.options.contents);
                         }
-                        var bottom = 0,right = 0;
+                        var bottom = 0,right = 0,bottomOffset = 0;
                         if(tthis.options.autoPosition){
                             if(event.pageY > $(window).height() - 100){
                                 bottom = $tip.height();
-                                $tip.addClass('bottom');
+                                bottomOffset = -tthis.options.offset.y;
+                                $tip.addClass('bottom').removeClass('top');
+                            }else if(event.pageY < 100){
+                                $tip.removeClass('bottom').addClass('top');
                             }else{
-                                $tip.removeClass('bottom');
+                                $tip.removeClass('bottom').removeClass('top');
                             }
                             if(event.pageX > $(window).width() - 200){
                                 right = $tip.width()+50;
                                 $tip.addClass('right');
                             }else{
                                 $tip.removeClass('right');
+                            }
+                            if($tip.hasClass('right') && $tip.hasClass('bottom')){
+                                $tip.addClass('right-bottom');
+                            }else{
+                                $tip.removeClass('right-bottom');
                             }
                         }else{
                             if(tthis.options.position == 'top'){
@@ -51,21 +59,25 @@
                         }
 
                         $tip.css({
-                            top: event.pageY - bottom + tthis.options.offset.y,
+                            top: event.pageY - bottom + bottomOffset,
                             left: event.pageX - right + tthis.options.offset.x
                         }).stop(true,true).fadeIn();
                     },
                     'mouseleave': function(event){
                         $tip.stop(true,true).fadeOut();
+                        
                     },
                     'mousemove': function(event){
-                        var bottom = 0,right = 0;
+                        var bottom = 0,right = 0,bottomOffset = 0;
                         if(tthis.options.autoPosition){
                             if(event.pageY > $(window).height() - 100){
                                 bottom = $tip.height();
-                                $tip.addClass('bottom');
+                                bottomOffset = -tthis.options.offset.y;
+                                $tip.addClass('bottom').removeClass('top');
+                            }else if(event.pageY < 100){
+                                $tip.removeClass('bottom').addClass('top');
                             }else{
-                                $tip.removeClass('bottom');
+                                $tip.removeClass('bottom').removeClass('top');
                             }
                             if(event.pageX > $(window).width() - 200){
                                 right = $tip.width()+50;
@@ -73,10 +85,15 @@
                             }else{
                                 $tip.removeClass('right');
                             }
+                            if($tip.hasClass('right') && $tip.hasClass('bottom')){
+                                $tip.addClass('right-bottom');
+                            }else{
+                                $tip.removeClass('right-bottom');
+                            }
                         }
                         
                         $tip.css({
-                            top: event.pageY - bottom + tthis.options.offset.y,
+                            top: event.pageY - bottom + bottomOffset,
                             left: event.pageX - right + tthis.options.offset.x
                         })
                     }
