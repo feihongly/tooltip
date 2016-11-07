@@ -2,6 +2,7 @@
 @tip-bg: #FFF3CF;
 @tip-width: 6px;
 
+
 .gfTooltip {
     .bordered;
     background: @tip-bg;
@@ -112,6 +113,10 @@ article {
     padding: @default-padding;
     border-radius: @border-radius;
 
+    h4 {
+        margin-top: 0;
+    }
+    
     .gototop {
         border: inherit;
         border-radius: inherit;
@@ -120,8 +125,12 @@ article {
         color: #FFF;
     }
 
-    pre>code {
-        padding-bottom: 20px !important;
-        font-size: @font-size-16 !important;
+    pre {
+        margin-bottom: 0;
+
+        code {
+            padding-bottom: 20px !important;
+            font-size: @font-size-16 !important;
+        }
     }
 }

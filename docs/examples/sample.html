@@ -40,11 +40,36 @@
 $(function(){
     $('body').gfTooltip({
         target: '.tooltip',
-        autoPosition: true,
         contents: function(elem){
             return $(elem).attr('data-tips');
         }
     });
+});
+</code>
+</pre>
+    </article>
+    <h3>About Settings</h3>
+    <article>
+        <h4>Settings</h4>
+<pre>
+<code>
+//可以将tooltip绑定到任何已经存在的元素上
+//建议绑定到已有的元素，然后target设定为需要显示tooltip的元素
+//target可以是ready时候并不存在的元素，这样就可以支持实时生成出来的元素了
+$('body').gfTooltip({
+    target: '.tooltip',
+    //offset表示tooltip的偏移量
+    offset: {
+        x: 20,
+        y: 10
+    },
+    //contents允许string，也支持function返回
+    //其中elem为当前target的jquery对象
+    //可以在回调函数中，对elem进行操作
+    //例如通过获取elem对象的属性，来return需要显示的tips
+    contents: function(elem){
+        return $(elem).attr('data-tips');
+    }
 });
 </code>
 </pre>
@@ -55,7 +80,6 @@ $(function(){
         $(function(){
             $('article').gfTooltip({
                 target: '.tooltip',
-                autoPosition: true,
                 contents: function(elem){
                     return $(elem).attr('data-tips');
                 }
@@ -63,7 +87,6 @@ $(function(){
 
             $('body').gfTooltip({
                 target: 'h1',
-                autoPosition: true,
                 contents: 'H1 Tooltip'
             });
         });

@@ -10,12 +10,13 @@
                 x: 20,
                 y: 10
             },
-            position: 'left',
-            autoPosition: false
+            // position: 'left',
+            autoPosition: true
         },
         this.options = $.extend({}, this.defaults, opt);
         this.$tip = '<div class="gfTooltip"></div>';
     }
+    
     //定义gfTooltipOption的方法
     gfTooltipOption.prototype = {
         init: function() {

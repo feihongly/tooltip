@@ -11,6 +11,8 @@ var gulp = require('gulp'),
     // revCollector = require('gulp-rev-collector');
 // var notifier = new Notifier();
 
+var base = '../front/';
+
 var errorHandler = function(error) {
     Notifier.notify({
         message: error.message,
@@ -20,7 +22,7 @@ var errorHandler = function(error) {
 };
 
 gulp.task('clean:dist', function(){
-    return gulp.src(['dist/js/*','dist/css/*']).pipe(clean());
+    return gulp.src([base+'public/dist/js/*',base+'public/dist/css/*','dist/js/*','dist/css/*']).pipe(clean({force: true}));
 });
 
 gulp.task('build:js',['clean:dist'], function(){
@@ -31,7 +33,8 @@ gulp.task('build:js',['clean:dist'], function(){
             }))
             .pipe(uglify({preserveComments: 'some'}))
             // .pipe(rev())
-            .pipe(gulp.dest('dist/js'));
+            .pipe(gulp.dest('dist/js'))
+            .pipe(gulp.dest(base+'public/dist/js'));
             // .pipe(rev.manifest())
             // .pipe(gulp.dest('public/dist/rev/js'));
 });
@@ -44,7 +47,8 @@ gulp.task('build:css',['build:js'], function(){
             .pipe(plumber({errorHandler: errorHandler}))
             .pipe(less())
             .pipe(cssmin())
-            .pipe(gulp.dest('dist/css'));
+            .pipe(gulp.dest('dist/css'))
+            .pipe(gulp.dest(base+'public/dist/css'));
             // .pipe(Notifier.notify({
             //     message: 'Gulp task completed!!!',
             //     sound: 'Funk'
@@ -64,7 +68,7 @@ gulp.task('build:css',['build:js'], function(){
 
 gulp.task('default', ['clean:dist','build:js','build:css']);
 var watcher = gulp.task('watch', function(){
-    gulp.watch(['dist/js','dist/css'],['clean:dist']);
+    gulp.watch([base+'public/dist/js',base+'public/dist/css','dist/js','dist/css'],['clean:dist']);
     gulp.watch(['src/*.js'],['build:js']);
     gulp.watch(['less/*.less'],['build:css']);
     // gulp.watch(['dist/js/*','dist/css/*'],function(){
