@@ -18,4 +18,4 @@ $(function(){
 });
 ```
 
-More details, please click [Project Site](http://www.gogofeel.cn/tooltip "tooltip by gogofeel.cn")
+More details, please click [Project Site](http://www.gogofeel.cn/works/work/1 "tooltip by gogofeel.cn")
